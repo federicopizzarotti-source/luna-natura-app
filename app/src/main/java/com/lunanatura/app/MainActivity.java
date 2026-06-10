@@ -15,7 +15,8 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     private LunaView lunaView;
-    private TextView tvFaseNome, tvFaseSottotitolo, tvEtaLuna, tvDataOggi;
+    private TextView tvFaseNome, tvFaseSottotitolo, tvDataOggi;
+    // private TextView tvEtaLuna;
     private TextView tvCapelliPillola, tvCapelliTesto;
     private TextView tvLegnaPillola, tvLegnaTesto, tvLegnaProssimo;
     private LinearLayout layoutLegnaProssimo;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         lunaView = findViewById(R.id.lunaView);
         tvFaseNome = findViewById(R.id.tvFaseNome);
         tvFaseSottotitolo = findViewById(R.id.tvFaseSottotitolo);
-        tvEtaLuna = findViewById(R.id.tvEtaLuna);
+        // tvEtaLuna = findViewById(R.id.tvEtaLuna);
         tvDataOggi = findViewById(R.id.tvDataOggi);
         tvCapelliPillola = findViewById(R.id.tvCapelliPillola);
         tvCapelliTesto = findViewById(R.id.tvCapelliTesto);
@@ -160,7 +161,8 @@ public class MainActivity extends AppCompatActivity {
     private void applicaStilePillola(TextView tv, ConsiglioData.Valutazione v) {
         android.graphics.drawable.GradientDrawable bg = new android.graphics.drawable.GradientDrawable();
         bg.setCornerRadius(dpToPx(20));
-        bg.setStrokeWidth(1);
+        // bg.setStrokeWidth(1);
+        bg.setStroke(1, android.graphics.Color.TRANSPARENT);
 
         switch (v) {
             case OTTIMO:
