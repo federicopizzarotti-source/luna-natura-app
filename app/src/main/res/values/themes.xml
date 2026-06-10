@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.LunaNatura" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/oro_chiaro</item>
+        <item name="colorPrimaryVariant">@color/oro_medio</item>
+        <item name="colorOnPrimary">@color/sfondo_scuro</item>
+        <item name="colorSurface">@color/sfondo_card</item>
+        <item name="android:windowBackground">@color/sfondo_scuro</item>
+        <item name="android:statusBarColor">@color/sfondo_scuro</item>
+        <item name="android:navigationBarColor">@color/sfondo_scuro</item>
+    </style>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="sfondo_scuro">#1a1410</color>
+    <color name="sfondo_card">#231e18</color>
+    <color name="avorio">#e8d5a8</color>
+    <color name="oro_chiaro">#c4a882</color>
+    <color name="oro_medio">#a08860</color>
+    <color name="testo_secondario">#9a8a78</color>
+    <color name="testo_muto">#7a6a58</color>
+    <color name="testo_hint">#5a4a3a</color>
+    <color name="bordo">#3a2e24</color>
+    <color name="verde_ok">#7ab85a</color>
+    <color name="giallo_warn">#c49a40</color>
+    <color name="rosso_evita">#c05040</color>
+</resources>
