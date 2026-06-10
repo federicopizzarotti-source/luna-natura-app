@@ -22,8 +22,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Imposta permessi gradlew
-        run: git update-index --chmod=+x gradlew || chmod +x gradlew
+      - name: Scarica gradle-wrapper.jar ufficiale
+        run: curl -L "https://github.com/gradle/gradle/raw/v8.2.0/gradle/wrapper/gradle-wrapper.jar" -o gradle/wrapper/gradle-wrapper.jar
+
+      - name: Permessi gradlew
+        run: chmod +x gradlew
 
       - name: Compila APK debug
         run: ./gradlew assembleDebug
