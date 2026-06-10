@@ -22,11 +22,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Imposta permessi gradlew
-        run: git update-index --chmod=+x gradlew || chmod +x gradlew
-
-      - name: Compila APK debug
-        run: ./gradlew assembleDebug
+      - name: Scarica jar e compila
+        run: |
+          curl -L "https://github.com/gradle/gradle/raw/v8.2.0/gradle/wrapper/gradle-wrapper.jar" -o gradle/wrapper/gradle-wrapper.jar
+          chmod +x gradlew
+          ./gradlew assembleDebug
 
       - name: Salva APK come artefatto
         uses: actions/upload-artifact@v4
