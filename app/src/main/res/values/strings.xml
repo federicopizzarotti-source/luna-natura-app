@@ -1,4 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- App -->
     <string name="app_name">Luna &amp; Natura</string>
+
+    <!-- Schermata principale -->
+    <string name="btn_calendario">📅  Vedi calendario lunare del mese</string>
+    <string name="ciclo_del_mese">CICLO DEL MESE</string>
+    <string name="label_oggi">● Oggi</string>
+    <string name="label_nuova">● Nuova</string>
+    <string name="label_piena">○ Piena</string>
+    <string name="sezione_capelli">Capelli</string>
+    <string name="sezione_semina">Semina &amp; Raccolta</string>
+    <string name="sezione_legna">Potatura &amp; Legna</string>
+    <string name="prossimo_ottimale">PROSSIMO MOMENTO OTTIMALE</string>
+    <string name="giorno_ciclo">Giorno %1$d del ciclo · %2$d%% illuminata</string>
+
+    <!-- Calendario -->
+    <string name="titolo_calendario">Calendario Lunare</string>
+    <string name="legenda_nuova">🌑 Nuova</string>
+    <string name="legenda_crescente">🌓 Crescente</string>
+    <string name="legenda_piena">🌕 Piena</string>
+    <string name="legenda_calante">🌗 Calante</string>
+
+    <!-- Dettaglio giorno -->
+    <string name="btn_indietro">← Indietro</string>
+    <string name="btn_oggi">🌙  Torna al giorno di oggi</string>
+
+    <!-- About -->
+    <string name="titolo_about">Informazioni</string>
+    <string name="about_descrizione">Luna &amp; Natura ti aiuta a vivere in armonia con il ciclo lunare. Scopri ogni giorno la fase della luna e ricevi consigli pratici su quando tagliare i capelli, seminare, raccogliere e potare secondo la tradizione lunare.</string>
+    <string name="about_label_autore">Autore</string>
+    <string name="about_autore">Federico Pizzarotti</string>
+    <string name="about_label_email">Contatti</string>
+    <string name="about_email">federicopizzarotti@gmail.com</string>
+    <string name="about_label_versione">Versione</string>
+    <string name="about_versione">1.0</string>
+    <string name="about_label_data">Data di rilascio</string>
+    <string name="about_data">11 giugno 2026</string>
+    <string name="about_label_licenza">Licenza</string>
+    <string name="about_licenza">Questa app è distribuita gratuitamente per uso personale. Il codice sorgente è disponibile su GitHub.</string>
+    <string name="about_label_disclaimer">Disclaimer</string>
+    <string name="about_disclaimer">I consigli forniti da questa app si basano sulla tradizione popolare e su osservazioni empiriche tramandate nel tempo. Non costituiscono indicazioni scientifiche. L\'autore non si assume responsabilità per l\'uso che ne viene fatto.</string>
+
+    <!-- Fasi lunari -->
+    <string name="fase_luna_nuova">Luna Nuova</string>
+    <string name="fase_crescente">Luna Crescente</string>
+    <string name="fase_primo_quarto">Primo Quarto</string>
+    <string name="fase_luna_piena">Luna Piena</string>
+    <string name="fase_calante">Luna Calante</string>
+    <string name="fase_ultimo_quarto">Ultimo Quarto</string>
+    <string name="sub_inizio_ciclo">Inizio del ciclo</string>
+    <string name="sub_falce_crescente">Falce crescente</string>
+    <string name="sub_gibbosa_crescente">Gibbosa crescente</string>
+    <string name="sub_plenilunio">Plenilunio</string>
+    <string name="sub_gibbosa_calante">Gibbosa calante</string>
+    <string name="sub_falce_calante">Falce calante</string>
+
+    <!-- Valutazioni -->
+    <string name="val_ottimo">Ottimo</string>
+    <string name="val_favorevole">Favorevole</string>
+    <string name="val_buono">Buono</string>
+    <string name="val_neutro">Neutro</string>
+    <string name="val_sconsigliato">Sconsigliato</string>
+    <string name="val_evita">Evita</string>
+
+    <!-- Pillole valutazione capelli -->
+    <string name="capelli_pill_evita">Evita il taglio</string>
+    <string name="capelli_pill_ottimo">Ottimo momento</string>
+    <string name="capelli_pill_buono">Buono</string>
+    <string name="capelli_pill_mantieni">Buono per mantenersi</string>
+
+    <!-- Testi capelli -->
+    <string name="capelli_testo_nuova">La luna nuova è un momento di pausa e rigenerazione. Il taglio in questi giorni tende a dare risultati poco soddisfacenti — i capelli crescono più lenti e il taglio dura meno. Preferisci trattamenti nutrienti e maschere.</string>
+    <string name="capelli_testo_crescente">La luna crescente favorisce crescita rapida e vigorosa. Taglia oggi per capelli più folti e forti. Ideale anche per colorazioni — il colore risulta più intenso e duraturo.</string>
+    <string name="capelli_testo_piena">Al plenilunio l\'energia vitale è al massimo. Il taglio dà capelli luminosi e pieni di volume. Sconsigliata invece la colorazione — il capello è più poroso e assorbe in modo irregolare.</string>
+    <string name="capelli_testo_calante">La luna calante rallenta la crescita: il taglio dura più a lungo e la lunghezza si mantiene meglio. Ideale se vuoi conservare il taglio attuale. Ottimo anche per trattamenti fortificanti e rigeneranti.</string>
+
+    <!-- Mini-card semina -->
+    <string name="mc_ortaggi_aerei">Ortaggi aerei</string>
+    <string name="mc_ortaggi_sotterranei">Ortaggi sotterranei</string>
+    <string name="mc_trapianto">Trapianto</string>
+    <string name="mc_raccolta">Raccolta</string>
+
+    <!-- Testi semina -->
+    <string name="semina_testo_nuova">Giorni di terra: la luna nuova richiama energia verso il basso. Buona semina per radici, bulbi e tuberi. Evita raccolte e trapianti — le piante hanno poca vitalità in superficie.</string>
+    <string name="semina_testo_crescente">Giorni di fuoco e aria: la linfa sale vigorosa. Ideale per semina di piante da frutto, ortaggi aerei e trapianti. Ortaggi sotterranei e tuberi preferiscono la luna calante.</string>
+    <string name="semina_testo_piena">Il momento migliore per la raccolta: frutta, verdura e erbe aromatiche raccolte a luna piena hanno più sapore, più succo e si conservano meglio. Anche la semina di piante da frutto dà ottimi risultati.</string>
+    <string name="semina_testo_calante">Giorni di terra e acqua: l\'energia scende verso le radici. Momento eccellente per seminare carote, cipolle, aglio, patate e bulbi. Buono anche per la raccolta di conserve e prodotti da essiccare.</string>
+
+    <!-- Pillole legna -->
+    <string name="legna_pill_ideale">Momento ideale</string>
+    <string name="legna_pill_sconsigliato">Sconsigliato</string>
+    <string name="legna_pill_evita">Evita</string>
+
+    <!-- Testi legna -->
+    <string name="legna_testo_nuova">Con la linfa al minimo, il legno tagliato ora è asciutto, compatto e resistente. Momento ideale per raccogliere legna da ardere, per potature drastiche e per i tagli che non vuoi stimolino ricrescita vigorosa.</string>
+    <string name="legna_testo_crescente">La luna crescente spinge la linfa verso l\'alto: il legno tagliato ora contiene più umidità e marcisce prima. Attendi la luna calante per tagli, potature importanti e raccolta di legna da ardere.</string>
+    <string name="legna_testo_piena">Al plenilunio la linfa è al massimo — le piante sanguinano molto se tagliate e le ferite faticano a cicatrizzarsi. Anche la legna raccolta ora è ricca d\'acqua e brucia male. Aspetta ancora qualche giorno.</string>
+    <string name="legna_testo_calante">La linfa è in ritirata verso le radici: il legno è compatto, la pianta soffre meno e le ferite cicatrizzano velocemente. Il momento migliore per potature importanti, tagli di formazione e raccolta di legna da ardere.</string>
+    <string name="legna_prossimo_adesso">Adesso — approfitta!</string>
+    <string name="legna_prossimo_giorni">Tra %1$d giorni — luna calante</string>
+    <string name="locale_code">it</string>
 </resources>
