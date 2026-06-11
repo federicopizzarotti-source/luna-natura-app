@@ -1,5 +1,5 @@
 package com.lunanatura.app;
-
+ 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,38 +11,36 @@ import androidx.cardview.widget.CardView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-
+ 
 public class MainActivity extends AppCompatActivity {
-
+ 
     private LunaView lunaView;
-    private TextView tvFaseNome, tvFaseSottotitolo, tvDataOggi;
-    // private TextView tvEtaLuna;
+    private TextView tvFaseNome, tvFaseSottotitolo, tvCicloInfo, tvDataOggi;
     private TextView tvCapelliPillola, tvCapelliTesto;
     private TextView tvLegnaPillola, tvLegnaTesto, tvLegnaProssimo;
     private LinearLayout layoutLegnaProssimo;
     private TextView tvSeminaTesto;
     private TextView[] tvMiniCardLabel, tvMiniCardVal;
-    private TextView tvCicloInfo;
     private LinearLayout dotContainer;
-
+ 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+ 
         initViews();
         aggiornaConFaseLunare();
-
-        findViewById(R.id.btnCalendario).setOnClickListener(v -> {
-            startActivity(new Intent(this, CalendarioActivity.class));
-        });
+ 
+        findViewById(R.id.btnCalendario).setOnClickListener(v ->
+            startActivity(new Intent(this, CalendarioActivity.class))
+        );
     }
-
+ 
     private void initViews() {
         lunaView = findViewById(R.id.lunaView);
         tvFaseNome = findViewById(R.id.tvFaseNome);
         tvFaseSottotitolo = findViewById(R.id.tvFaseSottotitolo);
-        // tvEtaLuna = findViewById(R.id.tvEtaLuna);
+        tvCicloInfo = findViewById(R.id.tvCicloInfo);
         tvDataOggi = findViewById(R.id.tvDataOggi);
         tvCapelliPillola = findViewById(R.id.tvCapelliPillola);
         tvCapelliTesto = findViewById(R.id.tvCapelliTesto);
@@ -51,9 +49,8 @@ public class MainActivity extends AppCompatActivity {
         tvLegnaProssimo = findViewById(R.id.tvLegnaProssimo);
         layoutLegnaProssimo = findViewById(R.id.layoutLegnaProssimo);
         tvSeminaTesto = findViewById(R.id.tvSeminaTesto);
-        tvCicloInfo = findViewById(R.id.tvCicloInfo);
         dotContainer = findViewById(R.id.dotContainer);
-
+ 
         tvMiniCardLabel = new TextView[]{
             findViewById(R.id.tvMC1Label),
             findViewById(R.id.tvMC2Label),
@@ -67,34 +64,29 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.tvMC4Val)
         };
     }
-
+ 
     private void aggiornaConFaseLunare() {
         Date oggi = new Date();
         LunaCalcolo.InfoLuna info = LunaCalcolo.calcolaFase(oggi);
-
-        // Data
+ 
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE d MMMM yyyy", new Locale("it", "IT"));
         String dataStr = sdf.format(oggi);
         dataStr = dataStr.substring(0, 1).toUpperCase() + dataStr.substring(1);
         tvDataOggi.setText(dataStr);
-
-        // Luna
+ 
         lunaView.setFase(info.fase, info.illuminazione);
         tvFaseNome.setText(info.nomeBreve);
         tvFaseSottotitolo.setText(info.sottotitolo);
         tvCicloInfo.setText("Giorno " + info.giornoCiclo + " del ciclo · " +
             Math.round(info.illuminazione * 100) + "% illuminata");
-
-        // Dot ciclo
+ 
         aggiornaDotsCliclo(info.giornoCiclo);
-
-        // Consigli capelli
+ 
         ConsiglioData.ConsiglioSezione capelli = ConsiglioData.getConsiglioCapelli(info.fase, info.etaGiorni);
         tvCapelliPillola.setText(capelli.testoPillola);
         tvCapelliTesto.setText(capelli.testoDescrizione);
         applicaStilePillola(tvCapelliPillola, capelli.valutazionePillola);
-
-        // Consigli semina
+ 
         ConsiglioData.ConsiglioSezione semina = ConsiglioData.getConsiglioSemina(info.fase, info.etaGiorni);
         for (int i = 0; i < 4; i++) {
             tvMiniCardLabel[i].setText(semina.miniCardLabel[i]);
@@ -102,8 +94,7 @@ public class MainActivity extends AppCompatActivity {
             applicaColoreValore(tvMiniCardVal[i], semina.miniCardVal[i]);
         }
         tvSeminaTesto.setText(semina.testoExtra);
-
-        // Consigli legna
+ 
         ConsiglioData.ConsiglioSezione legna = ConsiglioData.getConsiglioLegna(info.fase, info.etaGiorni);
         tvLegnaPillola.setText(legna.testoPillola);
         tvLegnaTesto.setText(legna.testoDescrizione);
@@ -115,55 +106,35 @@ public class MainActivity extends AppCompatActivity {
             layoutLegnaProssimo.setVisibility(View.GONE);
         }
     }
-
+ 
     private void aggiornaDotsCliclo(int giornoCiclo) {
         dotContainer.removeAllViews();
         int totalDots = 15;
         int dotAtToday = (int) Math.round((giornoCiclo / 29.5f) * totalDots);
-
+ 
         for (int i = 0; i < totalDots; i++) {
             View dot = new View(this);
             int size = (i == dotAtToday) ? dpToPx(12) : dpToPx(7);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(size, size);
             lp.setMargins(dpToPx(3), 0, dpToPx(3), 0);
             dot.setLayoutParams(lp);
-
-            if (i == dotAtToday) {
-                dot.setBackgroundColor(Color.parseColor("#e8d5a8"));
-            } else if (i < dotAtToday) {
-                dot.setBackgroundColor(Color.parseColor("#7a6a58"));
-            } else {
-                dot.setBackgroundColor(Color.parseColor("#3a3028"));
-            }
-
-            // Arrotonda il dot
-            dot.post(() -> {
-                dot.setPivotX(dot.getWidth() / 2f);
-                dot.setPivotY(dot.getHeight() / 2f);
-            });
-            float cornerRadius = size / 2f;
-            dot.setBackground(createRoundDrawable(
-                i == dotAtToday ? Color.parseColor("#e8d5a8") :
-                i < dotAtToday ? Color.parseColor("#7a6a58") :
-                Color.parseColor("#3a3028"), cornerRadius));
-
+ 
+            int color = (i == dotAtToday) ? Color.parseColor("#e8d5a8") :
+                        (i < dotAtToday) ? Color.parseColor("#7a6a58") :
+                        Color.parseColor("#3a3028");
+ 
+            android.graphics.drawable.GradientDrawable d = new android.graphics.drawable.GradientDrawable();
+            d.setColor(color);
+            d.setCornerRadius(size / 2f);
+            dot.setBackground(d);
+ 
             dotContainer.addView(dot);
         }
     }
-
-    private android.graphics.drawable.GradientDrawable createRoundDrawable(int color, float radius) {
-        android.graphics.drawable.GradientDrawable d = new android.graphics.drawable.GradientDrawable();
-        d.setColor(color);
-        d.setCornerRadius(radius);
-        return d;
-    }
-
-    private void applicaStilePillola(TextView tv, ConsiglioData.Valutazione v) {
+ 
+    public static void applicaStilePillola(TextView tv, ConsiglioData.Valutazione v, int density) {
         android.graphics.drawable.GradientDrawable bg = new android.graphics.drawable.GradientDrawable();
-        bg.setCornerRadius(dpToPx(20));
-        // bg.setStrokeWidth(1);
-        bg.setStroke(1, android.graphics.Color.TRANSPARENT);
-
+        bg.setCornerRadius(20 * density);
         switch (v) {
             case OTTIMO:
             case FAVOREVOLE:
@@ -193,30 +164,34 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         tv.setBackground(bg);
-        tv.setPadding(dpToPx(12), dpToPx(4), dpToPx(12), dpToPx(4));
+        tv.setPadding(Math.round(12 * density), Math.round(4 * density),
+                      Math.round(12 * density), Math.round(4 * density));
     }
-
-    private void applicaColoreValore(TextView tv, ConsiglioData.Valutazione v) {
+ 
+    public static void applicaColoreValore(TextView tv, ConsiglioData.Valutazione v) {
         switch (v) {
             case OTTIMO:
             case FAVOREVOLE:
-                tv.setTextColor(Color.parseColor("#7ab85a"));
-                break;
+                tv.setTextColor(Color.parseColor("#7ab85a")); break;
             case BUONO:
-                tv.setTextColor(Color.parseColor("#5aa870"));
-                break;
+                tv.setTextColor(Color.parseColor("#5aa870")); break;
             case NEUTRO:
-                tv.setTextColor(Color.parseColor("#c4a882"));
-                break;
+                tv.setTextColor(Color.parseColor("#c4a882")); break;
             case SCONSIGLIATO:
-                tv.setTextColor(Color.parseColor("#c49a40"));
-                break;
+                tv.setTextColor(Color.parseColor("#c49a40")); break;
             case EVITA:
-                tv.setTextColor(Color.parseColor("#c05040"));
-                break;
+                tv.setTextColor(Color.parseColor("#c05040")); break;
         }
     }
-
+ 
+    private void applicaStilePillola(TextView tv, ConsiglioData.Valutazione v) {
+        applicaStilePillola(tv, v, getResources().getDisplayMetrics().density);
+    }
+ 
+    private void applicaColoreValore(TextView tv, ConsiglioData.Valutazione v) {
+        applicaColoreValore(tv, v);
+    }
+ 
     private int dpToPx(int dp) {
         return Math.round(dp * getResources().getDisplayMetrics().density);
     }
