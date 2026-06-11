@@ -1,1 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Luna &amp; Natura</string>
 
+    <!-- Main screen -->
+    <string name="btn_calendario">📅  View monthly lunar calendar</string>
+    <string name="ciclo_del_mese">MONTHLY CYCLE</string>
+    <string name="label_oggi">● Today</string>
+    <string name="label_nuova">● New</string>
+    <string name="label_piena">○ Full</string>
+    <string name="sezione_capelli">Hair</string>
+    <string name="sezione_semina">Sowing &amp; Harvest</string>
+    <string name="sezione_legna">Pruning &amp; Wood</string>
+    <string name="prossimo_ottimale">NEXT OPTIMAL TIME</string>
+    <string name="giorno_ciclo">Day %1$d of cycle · %2$d%% illuminated</string>
+
+    <!-- Calendar -->
+    <string name="titolo_calendario">Lunar Calendar</string>
+    <string name="legenda_nuova">🌑 New</string>
+    <string name="legenda_crescente">🌓 Waxing</string>
+    <string name="legenda_piena">🌕 Full</string>
+    <string name="legenda_calante">🌗 Waning</string>
+
+    <!-- Day detail -->
+    <string name="btn_indietro">← Back</string>
+    <string name="btn_oggi">🌙  Go to today</string>
+
+    <!-- About -->
+    <string name="titolo_about">About</string>
+    <string name="about_descrizione">Luna &amp; Natura helps you live in harmony with the lunar cycle. Discover the daily moon phase and get practical advice on when to cut your hair, sow, harvest and prune according to lunar tradition.</string>
+    <string name="about_label_autore">Author</string>
+    <string name="about_autore">Federico Pizzarotti</string>
+    <string name="about_label_email">Contact</string>
+    <string name="about_email">federicopizzarotti@gmail.com</string>
+    <string name="about_label_versione">Version</string>
+    <string name="about_versione">1.0</string>
+    <string name="about_label_data">Release date</string>
+    <string name="about_data">June 11, 2026</string>
+    <string name="about_label_licenza">License</string>
+    <string name="about_licenza">This app is distributed free of charge for personal use. Source code is available on GitHub.</string>
+    <string name="about_label_disclaimer">Disclaimer</string>
+    <string name="about_disclaimer">The advice provided by this app is based on folk tradition and empirical observations passed down over time. It does not constitute scientific guidance. The author assumes no responsibility for any use made of it.</string>
+
+    <!-- Moon phases -->
+    <string name="fase_luna_nuova">New Moon</string>
+    <string name="fase_crescente">Waxing Moon</string>
+    <string name="fase_primo_quarto">First Quarter</string>
+    <string name="fase_luna_piena">Full Moon</string>
+    <string name="fase_calante">Waning Moon</string>
+    <string name="fase_ultimo_quarto">Last Quarter</string>
+    <string name="sub_inizio_ciclo">Start of cycle</string>
+    <string name="sub_falce_crescente">Waxing crescent</string>
+    <string name="sub_gibbosa_crescente">Waxing gibbous</string>
+    <string name="sub_plenilunio">Full moon</string>
+    <string name="sub_gibbosa_calante">Waning gibbous</string>
+    <string name="sub_falce_calante">Waning crescent</string>
+
+    <!-- Ratings -->
+    <string name="val_ottimo">Excellent</string>
+    <string name="val_favorevole">Favorable</string>
+    <string name="val_buono">Good</string>
+    <string name="val_neutro">Neutral</string>
+    <string name="val_sconsigliato">Not advised</string>
+    <string name="val_evita">Avoid</string>
+
+    <!-- Hair pills -->
+    <string name="capelli_pill_evita">Avoid cutting</string>
+    <string name="capelli_pill_ottimo">Best time</string>
+    <string name="capelli_pill_buono">Good</string>
+    <string name="capelli_pill_mantieni">Good for maintaining length</string>
+
+    <!-- Hair texts -->
+    <string name="capelli_testo_nuova">The new moon is a time of rest and regeneration. Cutting during these days tends to give unsatisfying results — hair grows more slowly and the cut lasts less. Prefer nourishing treatments and masks.</string>
+    <string name="capelli_testo_crescente">The waxing moon encourages rapid and vigorous growth. Cut today for thicker, stronger hair. Also ideal for coloring — the color turns out more intense and long-lasting.</string>
+    <string name="capelli_testo_piena">At the full moon, vital energy is at its peak. Cutting gives luminous, voluminous hair. Coloring is not recommended — hair is more porous and absorbs unevenly.</string>
+    <string name="capelli_testo_calante">The waning moon slows growth: the cut lasts longer and length is better maintained. Ideal if you want to keep your current cut. Also great for strengthening and regenerating treatments.</string>
+
+    <!-- Sowing mini-cards -->
+    <string name="mc_ortaggi_aerei">Above-ground crops</string>
+    <string name="mc_ortaggi_sotterranei">Root crops</string>
+    <string name="mc_trapianto">Transplanting</string>
+    <string name="mc_raccolta">Harvest</string>
+
+    <!-- Sowing texts -->
+    <string name="semina_testo_nuova">Earth days: the new moon draws energy downward. Good for sowing roots, bulbs and tubers. Avoid harvesting and transplanting — plants have little vitality at the surface.</string>
+    <string name="semina_testo_crescente">Fire and air days: sap rises vigorously. Ideal for sowing fruit plants, above-ground vegetables and transplanting. Root vegetables and tubers prefer the waning moon.</string>
+    <string name="semina_testo_piena">The best time to harvest: fruit, vegetables and herbs picked at full moon have more flavor, more juice and keep longer. Sowing fruit plants also gives excellent results.</string>
+    <string name="semina_testo_calante">Earth and water days: energy flows down to the roots. Excellent time to sow carrots, onions, garlic, potatoes and bulbs. Also good for harvesting preserves and produce to dry.</string>
+
+    <!-- Wood pills -->
+    <string name="legna_pill_ideale">Ideal time</string>
+    <string name="legna_pill_sconsigliato">Not advised</string>
+    <string name="legna_pill_evita">Avoid</string>
+
+    <!-- Wood texts -->
+    <string name="legna_testo_nuova">With sap at its lowest, wood cut now is dry, compact and resistant. Ideal time to collect firewood, for drastic pruning and for cuts you don\'t want to stimulate vigorous regrowth.</string>
+    <string name="legna_testo_crescente">The waxing moon pushes sap upward: wood cut now contains more moisture and rots sooner. Wait for the waning moon for cuts, major pruning and firewood collection.</string>
+    <string name="legna_testo_piena">At full moon, sap is at its peak — plants bleed heavily when cut and wounds struggle to heal. Firewood collected now is water-rich and burns poorly. Wait a few more days.</string>
+    <string name="legna_testo_calante">Sap is retreating to the roots: wood is compact, the plant suffers less and wounds heal quickly. The best time for major pruning, formative cuts and firewood collection.</string>
+    <string name="legna_prossimo_adesso">Right now — take advantage!</string>
+    <string name="legna_prossimo_giorni">In %1$d days — waning moon</string>
+    <string name="locale_code">en</string>
+</resources>
