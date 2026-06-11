@@ -1,15 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="sfondo_scuro">#1a1410</color>
-    <color name="sfondo_card">#231e18</color>
-    <color name="avorio">#e8d5a8</color>
-    <color name="oro_chiaro">#c4a882</color>
-    <color name="oro_medio">#a08860</color>
-    <color name="testo_secondario">#9a8a78</color>
-    <color name="testo_muto">#7a6a58</color>
-    <color name="testo_hint">#5a4a3a</color>
-    <color name="bordo">#3a2e24</color>
-    <color name="verde_ok">#7ab85a</color>
-    <color name="giallo_warn">#c49a40</color>
-    <color name="rosso_evita">#c05040</color>
+
+    <!-- Sfondi -->
+    <color name="sfondo_principale">#e8d8c0</color>
+    <color name="sfondo_card">#dcc8a8</color>
+    <color name="sfondo_mini_card">#ceb890</color>
+
+    <!-- Bordi -->
+    <color name="bordo">#b8946a</color>
+    <color name="bordo_leggero">#c8a87a</color>
+
+    <!-- Testi -->
+    <color name="testo_principale">#3a2810</color>
+    <color name="testo_secondario">#6a4828</color>
+    <color name="testo_muto">#7a5838</color>
+    <color name="testo_hint">#8a6848</color>
+
+    <!-- Dots ciclo lunare -->
+    <color name="dot_oggi">#3a2810</color>
+    <color name="dot_passato">#8a6848</color>
+    <color name="dot_futuro">#c8b090</color>
+
+    <!-- Valutazione: OTTIMO / FAVOREVOLE -->
+    <color name="val_ottimo_sfondo">#b8d8b0</color>
+    <color name="val_ottimo_bordo">#3a7828</color>
+    <color name="val_ottimo_testo">#163810</color>
+
+    <!-- Valutazione: BUONO -->
+    <color name="val_buono_sfondo">#c8e0b8</color>
+    <color name="val_buono_bordo">#4a8838</color>
+    <color name="val_buono_testo">#1a4810</color>
+
+    <!-- Valutazione: NEUTRO -->
+    <color name="val_neutro_sfondo">#ddd0b8</color>
+    <color name="val_neutro_bordo">#a88858</color>
+    <color name="val_neutro_testo">#5a3818</color>
+
+    <!-- Valutazione: SCONSIGLIATO -->
+    <color name="val_warn_sfondo">#e8d4a8</color>
+    <color name="val_warn_bordo">#a87828</color>
+    <color name="val_warn_testo">#5a3808</color>
+
+    <!-- Valutazione: EVITA -->
+    <color name="val_evita_sfondo">#e8c8c0</color>
+    <color name="val_evita_bordo">#a83818</color>
+    <color name="val_evita_testo">#5a1808</color>
+
+    <!-- Luna -->
+    <color name="luna_sfondo">#8a6848</color>
+    <color name="luna_luce">#f0dfa8</color>
+    <color name="luna_ombra">#c8a870</color>
+    <color name="luna_crateri">#d4c490</color>
+
 </resources>
