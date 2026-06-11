@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-
+ 
     <application
         android:allowBackup="true"
         android:icon="@android:drawable/ic_menu_compass"
@@ -20,6 +20,10 @@
             android:name=".CalendarioActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".DettaglioGiornoActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
     </application>
-
+ 
 </manifest>
