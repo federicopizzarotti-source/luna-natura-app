@@ -1,26 +1,3 @@
-package com.lunanatura.app;
- 
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.GridLayout;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
- 
-public class CalendarioActivity extends AppCompatActivity {
- 
-    private TextView tvMeseAnno;
-    private GridLayout gridCalendario;
-    private Calendar calendarioCorrente;
-    private int oggiGiorno, oggiMese, oggiAnno;
- 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,20 +33,27 @@ public class CalendarioActivity extends AppCompatActivity {
     }
  
     private void aggiornaMese() {
-        SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy", new Locale("it", "IT"));
+        String localeCode = getString(R.string.locale_code);
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy", new Locale(localeCode));
         String meseStr = sdf.format(calendarioCorrente.getTime());
         meseStr = meseStr.substring(0, 1).toUpperCase() + meseStr.substring(1);
         tvMeseAnno.setText(meseStr);
  
         gridCalendario.removeAllViews();
  
-        // Intestazioni giorni settimana
-        String[] giorni = {"Lu", "Ma", "Me", "Gi", "Ve", "Sa", "Do"};
-        for (String g : giorni) {
+        // Intestazioni giorni settimana (locale-aware)
+        Calendar tmp = (Calendar) calendarioCorrente.clone();
+        SimpleDateFormat sdfGiorno = new SimpleDateFormat("EEE", new Locale(localeCode));
+        tmp.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        for (int i = 0; i < 7; i++) {
+            String label = sdfGiorno.format(tmp.getTime());
+            label = label.length() >= 2 ? label.substring(0, 2) : label;
+            label = label.substring(0,1).toUpperCase() + label.substring(1);
+ 
             TextView tv = new TextView(this);
-            tv.setText(g);
+            tv.setText(label);
             tv.setTextSize(13);
-            tv.setTextColor(Color.parseColor("#7a6a58"));
+            tv.setTextColor(ContextCompat.getColor(this, R.color.testo_muto));
             GridLayout.LayoutParams lp = new GridLayout.LayoutParams();
             lp.width = 0;
             lp.height = dpToPx(36);
@@ -77,6 +61,8 @@ public class CalendarioActivity extends AppCompatActivity {
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(lp);
             gridCalendario.addView(tv);
+ 
+            tmp.add(Calendar.DAY_OF_WEEK, 1);
         }
  
         Calendar cal = (Calendar) calendarioCorrente.clone();
@@ -118,11 +104,11 @@ public class CalendarioActivity extends AppCompatActivity {
             android.graphics.drawable.GradientDrawable bg = new android.graphics.drawable.GradientDrawable();
             bg.setCornerRadius(dpToPx(8));
             if (isOggi) {
-                bg.setColor(Color.parseColor("#2e2820"));
-                bg.setStroke(1, Color.parseColor("#c4a882"));
+                bg.setColor(ContextCompat.getColor(this, R.color.sfondo_card));
+                bg.setStroke(1, ContextCompat.getColor(this, R.color.testo_principale));
             } else {
-                bg.setColor(Color.parseColor("#1e1a14"));
-                bg.setStroke(1, Color.parseColor("#2a2218"));
+                bg.setColor(ContextCompat.getColor(this, R.color.sfondo_mini_card));
+                bg.setStroke(1, ContextCompat.getColor(this, R.color.bordo_leggero));
             }
             cell.setBackground(bg);
  
@@ -135,12 +121,13 @@ public class CalendarioActivity extends AppCompatActivity {
             tvGiorno.setText(String.valueOf(giorno));
             tvGiorno.setTextSize(11);
             tvGiorno.setGravity(Gravity.CENTER);
-            tvGiorno.setTextColor(isOggi ? Color.parseColor("#e8d5a8") : Color.parseColor("#7a6a58"));
+            tvGiorno.setTextColor(isOggi
+                ? ContextCompat.getColor(this, R.color.testo_principale)
+                : ContextCompat.getColor(this, R.color.testo_muto));
  
             cell.addView(tvEmoji);
             cell.addView(tvGiorno);
  
-            // Click: apri dettaglio giorno
             final int giornoFinale = giorno;
             final int meseFinale = meseCorrente;
             final int annoFinale = annoCorrente;
