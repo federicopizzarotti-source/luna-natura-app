@@ -2,15 +2,15 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/sfondo_scuro"
+    android:background="@color/sfondo_principale"
     android:fillViewport="true">
- 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingBottom="24dp">
- 
+
         <!-- Top bar -->
         <LinearLayout
             android:id="@+id/topBar"
@@ -21,26 +21,38 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:gravity="center_vertical">
- 
+
             <TextView
                 android:id="@+id/tvAppTitolo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Luna &amp; Natura"
-                android:textColor="@color/oro_chiaro"
+                android:text="@string/app_name"
+                android:textColor="@color/testo_principale"
                 android:textSize="14sp"
                 android:letterSpacing="0.12"
                 android:fontFamily="serif"/>
- 
+
             <TextView
                 android:id="@+id/tvDataOggi"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:textColor="@color/testo_muto"
-                android:textSize="11sp"/>
+                android:textSize="11sp"
+                android:gravity="center"/>
+
+            <!-- Pulsante About -->
+            <TextView
+                android:id="@+id/btnAbout"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:text="ℹ"
+                android:textSize="18sp"
+                android:textColor="@color/testo_muto"
+                android:gravity="center"/>
         </LinearLayout>
- 
+
         <!-- Luna grafica -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,21 +61,21 @@
             android:gravity="center"
             android:paddingTop="20dp"
             android:paddingBottom="12dp">
- 
+
             <com.lunanatura.app.LunaView
                 android:id="@+id/lunaView"
                 android:layout_width="150dp"
                 android:layout_height="150dp"/>
- 
+
             <TextView
                 android:id="@+id/tvFaseNome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:textColor="@color/avorio"
+                android:textColor="@color/testo_principale"
                 android:textSize="22sp"
                 android:fontFamily="serif"/>
- 
+
             <TextView
                 android:id="@+id/tvFaseSottotitolo"
                 android:layout_width="wrap_content"
@@ -72,16 +84,16 @@
                 android:textColor="@color/testo_muto"
                 android:textSize="12sp"
                 android:letterSpacing="0.08"/>
- 
+
             <TextView
                 android:id="@+id/tvCicloInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:textColor="@color/oro_medio"
+                android:textColor="@color/testo_secondario"
                 android:textSize="11sp"/>
         </LinearLayout>
- 
+
         <!-- Mini timeline ciclo -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -90,320 +102,192 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/card_bg"
+            android:background="@drawable/card_bg_chiaro"
             android:padding="12dp">
- 
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CICLO DEL MESE"
+                android:text="@string/ciclo_del_mese"
                 android:textColor="@color/testo_muto"
                 android:textSize="10sp"
                 android:letterSpacing="0.1"
                 android:layout_marginBottom="8dp"/>
- 
+
             <LinearLayout
                 android:id="@+id/dotContainer"
                 android:layout_width="match_parent"
                 android:layout_height="16dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"/>
- 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="6dp">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="● Nuova"
-                    android:textColor="@color/testo_hint"
-                    android:textSize="9sp"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="● Oggi"
-                    android:textColor="@color/oro_chiaro"
-                    android:textSize="9sp"
-                    android:gravity="center"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="○ Piena"
-                    android:textColor="@color/testo_hint"
-                    android:textSize="9sp"
-                    android:gravity="end"/>
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:text="@string/label_nuova"
+                    android:textColor="@color/testo_hint" android:textSize="9sp"/>
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:text="@string/label_oggi"
+                    android:textColor="@color/testo_principale" android:textSize="9sp" android:gravity="center"/>
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:text="@string/label_piena"
+                    android:textColor="@color/testo_hint" android:textSize="9sp" android:gravity="end"/>
             </LinearLayout>
         </LinearLayout>
- 
+
         <View android:layout_width="match_parent" android:layout_height="0.5dp"
             android:background="@color/bordo" android:layout_marginTop="4dp"/>
- 
+
         <!-- Sezione Capelli -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
- 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:padding="20dp">
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
                 android:layout_marginBottom="10dp">
- 
-                <TextView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:text="✂"
-                    android:textSize="16sp"
-                    android:gravity="center"
+                <TextView android:layout_width="32dp" android:layout_height="32dp"
+                    android:text="✂" android:textSize="16sp" android:gravity="center"
                     android:background="@drawable/icona_bg_verde"/>
- 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="10dp"
-                    android:text="Capelli"
-                    android:textColor="@color/oro_chiaro"
-                    android:textSize="15sp"
-                    android:fontFamily="serif"/>
- 
-                <TextView
-                    android:id="@+id/tvCapelliPillola"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:layout_marginStart="10dp"
+                    android:text="@string/sezione_capelli"
+                    android:textColor="@color/testo_principale" android:textSize="15sp" android:fontFamily="serif"/>
+                <TextView android:id="@+id/tvCapelliPillola"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:textSize="11sp"/>
             </LinearLayout>
- 
-            <TextView
-                android:id="@+id/tvCapelliTesto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/testo_secondario"
-                android:textSize="13sp"
+            <TextView android:id="@+id/tvCapelliTesto"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:textColor="@color/testo_secondario" android:textSize="13sp"
                 android:lineSpacingMultiplier="1.5"/>
         </LinearLayout>
- 
+
         <View android:layout_width="match_parent" android:layout_height="0.5dp"
             android:background="@color/bordo"/>
- 
+
         <!-- Sezione Semina -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
- 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:padding="20dp">
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
                 android:layout_marginBottom="12dp">
- 
-                <TextView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:text="🌱"
-                    android:textSize="16sp"
-                    android:gravity="center"
+                <TextView android:layout_width="32dp" android:layout_height="32dp"
+                    android:text="🌱" android:textSize="16sp" android:gravity="center"
                     android:background="@drawable/icona_bg_teal"/>
- 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="Semina &amp; Raccolta"
-                    android:textColor="@color/oro_chiaro"
-                    android:textSize="15sp"
-                    android:fontFamily="serif"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp" android:text="@string/sezione_semina"
+                    android:textColor="@color/testo_principale" android:textSize="15sp" android:fontFamily="serif"/>
             </LinearLayout>
- 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
- 
-                <LinearLayout android:id="@+id/mc1"
-                    android:layout_width="0dp" android:layout_height="wrap_content"
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginBottom="8dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                     android:layout_weight="1" android:layout_marginEnd="6dp"
                     android:orientation="vertical" android:padding="10dp"
                     android:background="@drawable/mini_card_bg">
-                    <TextView android:id="@+id/tvMC1Label"
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:textColor="@color/testo_muto" android:textSize="10sp"
-                        android:letterSpacing="0.05" android:layout_marginBottom="4dp"/>
-                    <TextView android:id="@+id/tvMC1Val"
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:textSize="12sp" android:fontFamily="serif"/>
+                    <TextView android:id="@+id/tvMC1Label" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textColor="@color/testo_muto"
+                        android:textSize="10sp" android:layout_marginBottom="4dp"/>
+                    <TextView android:id="@+id/tvMC1Val" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textSize="12sp" android:fontFamily="serif"/>
                 </LinearLayout>
- 
-                <LinearLayout android:id="@+id/mc2"
-                    android:layout_width="0dp" android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical" android:padding="10dp"
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical" android:padding="10dp"
                     android:background="@drawable/mini_card_bg">
-                    <TextView android:id="@+id/tvMC2Label"
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:textColor="@color/testo_muto" android:textSize="10sp"
-                        android:letterSpacing="0.05" android:layout_marginBottom="4dp"/>
-                    <TextView android:id="@+id/tvMC2Val"
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:textSize="12sp" android:fontFamily="serif"/>
+                    <TextView android:id="@+id/tvMC2Label" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textColor="@color/testo_muto"
+                        android:textSize="10sp" android:layout_marginBottom="4dp"/>
+                    <TextView android:id="@+id/tvMC2Val" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textSize="12sp" android:fontFamily="serif"/>
                 </LinearLayout>
             </LinearLayout>
- 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="10dp">
- 
-                <LinearLayout android:id="@+id/mc3"
-                    android:layout_width="0dp" android:layout_height="wrap_content"
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginBottom="10dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                     android:layout_weight="1" android:layout_marginEnd="6dp"
                     android:orientation="vertical" android:padding="10dp"
                     android:background="@drawable/mini_card_bg">
-                    <TextView android:id="@+id/tvMC3Label"
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:textColor="@color/testo_muto" android:textSize="10sp"
-                        android:letterSpacing="0.05" android:layout_marginBottom="4dp"/>
-                    <TextView android:id="@+id/tvMC3Val"
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:textSize="12sp" android:fontFamily="serif"/>
+                    <TextView android:id="@+id/tvMC3Label" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textColor="@color/testo_muto"
+                        android:textSize="10sp" android:layout_marginBottom="4dp"/>
+                    <TextView android:id="@+id/tvMC3Val" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textSize="12sp" android:fontFamily="serif"/>
                 </LinearLayout>
- 
-                <LinearLayout android:id="@+id/mc4"
-                    android:layout_width="0dp" android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical" android:padding="10dp"
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical" android:padding="10dp"
                     android:background="@drawable/mini_card_bg">
-                    <TextView android:id="@+id/tvMC4Label"
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:textColor="@color/testo_muto" android:textSize="10sp"
-                        android:letterSpacing="0.05" android:layout_marginBottom="4dp"/>
-                    <TextView android:id="@+id/tvMC4Val"
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:textSize="12sp" android:fontFamily="serif"/>
+                    <TextView android:id="@+id/tvMC4Label" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textColor="@color/testo_muto"
+                        android:textSize="10sp" android:layout_marginBottom="4dp"/>
+                    <TextView android:id="@+id/tvMC4Val" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textSize="12sp" android:fontFamily="serif"/>
                 </LinearLayout>
             </LinearLayout>
- 
-            <TextView
-                android:id="@+id/tvSeminaTesto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/testo_secondario"
-                android:textSize="13sp"
+
+            <TextView android:id="@+id/tvSeminaTesto"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:textColor="@color/testo_secondario" android:textSize="13sp"
                 android:lineSpacingMultiplier="1.5"/>
         </LinearLayout>
- 
+
         <View android:layout_width="match_parent" android:layout_height="0.5dp"
             android:background="@color/bordo"/>
- 
+
         <!-- Sezione Legna -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
- 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:padding="20dp">
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
                 android:layout_marginBottom="10dp">
- 
-                <TextView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:text="🪓"
-                    android:textSize="16sp"
-                    android:gravity="center"
+                <TextView android:layout_width="32dp" android:layout_height="32dp"
+                    android:text="🪓" android:textSize="16sp" android:gravity="center"
                     android:background="@drawable/icona_bg_terra"/>
- 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="10dp"
-                    android:text="Potatura &amp; Legna"
-                    android:textColor="@color/oro_chiaro"
-                    android:textSize="15sp"
-                    android:fontFamily="serif"/>
- 
-                <TextView
-                    android:id="@+id/tvLegnaPillola"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:layout_marginStart="10dp"
+                    android:text="@string/sezione_legna"
+                    android:textColor="@color/testo_principale" android:textSize="15sp" android:fontFamily="serif"/>
+                <TextView android:id="@+id/tvLegnaPillola"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:textSize="11sp"/>
             </LinearLayout>
- 
-            <TextView
-                android:id="@+id/tvLegnaTesto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/testo_secondario"
-                android:textSize="13sp"
+
+            <TextView android:id="@+id/tvLegnaTesto"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:textColor="@color/testo_secondario" android:textSize="13sp"
                 android:lineSpacingMultiplier="1.5"/>
- 
-            <LinearLayout
-                android:id="@+id/layoutLegnaProssimo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/mini_card_bg"
-                android:padding="12dp">
- 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="PROSSIMO MOMENTO OTTIMALE"
-                    android:textColor="@color/testo_muto"
-                    android:textSize="10sp"
+
+            <LinearLayout android:id="@+id/layoutLegnaProssimo"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:layout_marginTop="10dp"
+                android:background="@drawable/mini_card_bg" android:padding="12dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="@string/prossimo_ottimale"
+                    android:textColor="@color/testo_muto" android:textSize="10sp"
                     android:layout_marginBottom="4dp"/>
- 
-                <TextView
-                    android:id="@+id/tvLegnaProssimo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/oro_chiaro"
-                    android:textSize="13sp"
-                    android:fontFamily="serif"/>
+                <TextView android:id="@+id/tvLegnaProssimo"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:textColor="@color/testo_principale" android:textSize="13sp" android:fontFamily="serif"/>
             </LinearLayout>
         </LinearLayout>
- 
-        <!-- Pulsante azione in fondo -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp">
- 
-            <TextView
-                android:id="@+id/btnCalendario"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="📅  Vedi calendario lunare del mese"
-                android:textColor="@color/oro_chiaro"
-                android:textSize="13sp"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+
+        <!-- Pulsante Calendario -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center"
+            android:layout_marginTop="8dp" android:layout_marginBottom="16dp">
+            <TextView android:id="@+id/btnCalendario"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="@string/btn_calendario"
+                android:textColor="@color/testo_principale" android:textSize="13sp"
+                android:paddingStart="20dp" android:paddingEnd="20dp"
+                android:paddingTop="10dp" android:paddingBottom="10dp"
                 android:background="@drawable/btn_calendario_bg"/>
         </LinearLayout>
- 
+
     </LinearLayout>
 </ScrollView>
