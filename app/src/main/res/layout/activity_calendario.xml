@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/sfondo_scuro">
-
+    android:background="@color/sfondo_principale">
+ 
     <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,28 +15,28 @@
         android:paddingStart="12dp"
         android:paddingEnd="16dp"
         android:paddingBottom="12dp">
-
+ 
         <ImageButton
             android:id="@+id/btnBack"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@android:drawable/ic_menu_revert"
             android:background="@android:color/transparent"
-            android:tint="@color/oro_chiaro"/>
-
+            android:tint="@color/testo_principale"/>
+ 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Calendario Lunare"
-            android:textColor="@color/oro_chiaro"
+            android:text="@string/titolo_calendario"
+            android:textColor="@color/testo_principale"
             android:textSize="16sp"
             android:fontFamily="serif"
             android:gravity="center"/>
-
+ 
         <View android:layout_width="40dp" android:layout_height="40dp"/>
     </LinearLayout>
-
+ 
     <!-- Navigazione mese -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,7 +46,7 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:paddingBottom="16dp">
-
+ 
         <ImageButton
             android:id="@+id/btnMesePrecedente"
             android:layout_width="40dp"
@@ -54,17 +54,17 @@
             android:src="@android:drawable/ic_media_previous"
             android:background="@android:color/transparent"
             android:tint="@color/testo_muto"/>
-
+ 
         <TextView
             android:id="@+id/tvMeseAnno"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/avorio"
+            android:textColor="@color/testo_principale"
             android:textSize="17sp"
             android:fontFamily="serif"
             android:gravity="center"/>
-
+ 
         <ImageButton
             android:id="@+id/btnMeseSuccessivo"
             android:layout_width="40dp"
@@ -73,16 +73,16 @@
             android:background="@android:color/transparent"
             android:tint="@color/testo_muto"/>
     </LinearLayout>
-
+ 
     <View android:layout_width="match_parent" android:layout_height="0.5dp"
         android:background="@color/bordo"/>
-
+ 
     <!-- Griglia calendario -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-
+ 
         <GridLayout
             android:id="@+id/gridCalendario"
             android:layout_width="match_parent"
@@ -90,7 +90,7 @@
             android:columnCount="7"
             android:padding="8dp"/>
     </ScrollView>
-
+ 
     <!-- Legenda -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -99,17 +99,17 @@
         android:gravity="center"
         android:padding="12dp"
         android:background="@color/sfondo_card">
-
+ 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="🌑 Nuova" android:textColor="@color/testo_muto" android:textSize="11sp"
+            android:text="@string/legenda_nuova" android:textColor="@color/testo_muto" android:textSize="11sp"
             android:layout_marginEnd="12dp"/>
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="🌓 Crescente" android:textColor="@color/testo_muto" android:textSize="11sp"
+            android:text="@string/legenda_crescente" android:textColor="@color/testo_muto" android:textSize="11sp"
             android:layout_marginEnd="12dp"/>
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="🌕 Piena" android:textColor="@color/testo_muto" android:textSize="11sp"
+            android:text="@string/legenda_piena" android:textColor="@color/testo_muto" android:textSize="11sp"
             android:layout_marginEnd="12dp"/>
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="🌗 Calante" android:textColor="@color/testo_muto" android:textSize="11sp"/>
+            android:text="@string/legenda_calante" android:textColor="@color/testo_muto" android:textSize="11sp"/>
     </LinearLayout>
 </LinearLayout>
