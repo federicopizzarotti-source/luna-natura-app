@@ -2,7 +2,6 @@
 
 **Versione 1.0 — 11 giugno 2026**  
 **Sviluppatore:** Federico Pizzarotti  
-**Contatto:** federicopizzarotti@gmail.com
 
 ---
 
@@ -31,10 +30,6 @@ I consigli forniti dall'app si basano sulla tradizione popolare e su osservazion
 ## 6. Modifiche alla presente informativa
 
 Eventuali modifiche alla presente informativa saranno pubblicate su questa pagina con aggiornamento della data di versione.
-
-## 7. Contatti
-
-Per qualsiasi domanda: federicopizzarotti@gmail.com
 
 ---
 
