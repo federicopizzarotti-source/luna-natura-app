@@ -27,9 +27,9 @@ jobs:
  
       - name: Permessi gradlew
         run: chmod +x gradlew
- 
+
       - name: Decodifica keystore
-        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > app/luna-natura-release.jks
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | tr -d '\n\r ' | base64 --decode > app/luna-natura-release.jks
  
       - name: Compila APK release firmato
         run: ./gradlew assembleRelease
