@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
+        ((TextView) findViewById(R.id.btnCalendario)).setTextColor(ContextCompat.getColor(this, R.color.btn_calendario_testo));
         aggiornaConFaseLunare();
         findViewById(R.id.btnCalendario).setOnClickListener(v ->
             startActivity(new Intent(this, CalendarioActivity.class)));
