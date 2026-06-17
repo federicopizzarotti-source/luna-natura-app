@@ -30,10 +30,21 @@ public class CalendarioActivity extends AppCompatActivity {
         gridCalendario = findViewById(R.id.gridCalendario);
  
         ImageButton btnBack = findViewById(R.id.btnBack);
-        ImageButton btnMesePrecedente = findViewById(R.id.btnMesePrecedente);
-        ImageButton btnMeseSuccessivo = findViewById(R.id.btnMeseSuccessivo);
+        TextView btnMesePrecedente = findViewById(R.id.btnMesePrecedente);
+        TextView btnMeseSuccessivo = findViewById(R.id.btnMeseSuccessivo);
  
         btnBack.setOnClickListener(v -> finish());
+ 
+        // Sfondo verde salvia per pulsanti cambio mese da colors.xml
+        android.graphics.drawable.GradientDrawable bgBtn =
+            MainActivity.creaRoundDrawable(
+                ContextCompat.getColor(this, R.color.btn_mese_sfondo),
+                ContextCompat.getColor(this, R.color.btn_mese_bordo),
+                dpToPx(8), 1);
+        btnMesePrecedente.setBackground(bgBtn);
+        btnMeseSuccessivo.setBackground(bgBtn);
+        btnMesePrecedente.setTextColor(ContextCompat.getColor(this, R.color.btn_mese_testo));
+        btnMeseSuccessivo.setTextColor(ContextCompat.getColor(this, R.color.btn_mese_testo));
  
         Calendar oggi = Calendar.getInstance();
         oggiGiorno = oggi.get(Calendar.DAY_OF_MONTH);
@@ -64,15 +75,14 @@ public class CalendarioActivity extends AppCompatActivity {
  
         gridCalendario.removeAllViews();
  
-        // Intestazioni giorni settimana (locale-aware)
+        // Intestazioni giorni settimana localizzate
         Calendar tmp = (Calendar) calendarioCorrente.clone();
         SimpleDateFormat sdfGiorno = new SimpleDateFormat("EEE", new Locale(localeCode));
         tmp.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         for (int i = 0; i < 7; i++) {
             String label = sdfGiorno.format(tmp.getTime());
             label = label.length() >= 2 ? label.substring(0, 2) : label;
-            label = label.substring(0,1).toUpperCase() + label.substring(1);
- 
+            label = label.substring(0, 1).toUpperCase() + label.substring(1);
             TextView tv = new TextView(this);
             tv.setText(label);
             tv.setTextSize(13);
@@ -84,7 +94,6 @@ public class CalendarioActivity extends AppCompatActivity {
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(lp);
             gridCalendario.addView(tv);
- 
             tmp.add(Calendar.DAY_OF_WEEK, 1);
         }
  
@@ -122,18 +131,17 @@ public class CalendarioActivity extends AppCompatActivity {
             lp.setMargins(dpToPx(2), dpToPx(2), dpToPx(2), dpToPx(2));
             cell.setLayoutParams(lp);
  
-            boolean isOggi = (giorno == oggiGiorno && meseCorrente == oggiMese && annoCorrente == oggiAnno);
+            boolean isOggi = (giorno == oggiGiorno
+                && meseCorrente == oggiMese
+                && annoCorrente == oggiAnno);
  
-            android.graphics.drawable.GradientDrawable bg = new android.graphics.drawable.GradientDrawable();
-            bg.setCornerRadius(dpToPx(8));
-            if (isOggi) {
-                bg.setColor(ContextCompat.getColor(this, R.color.sfondo_card));
-                bg.setStroke(1, ContextCompat.getColor(this, R.color.testo_principale));
-            } else {
-                bg.setColor(ContextCompat.getColor(this, R.color.sfondo_mini_card));
-                bg.setStroke(1, ContextCompat.getColor(this, R.color.bordo_leggero));
-            }
-            cell.setBackground(bg);
+            // Colori celle da colors.xml
+            cell.setBackground(MainActivity.creaRoundDrawable(
+                ContextCompat.getColor(this,
+                    isOggi ? R.color.cal_oggi_sfondo : R.color.cal_cella_sfondo),
+                ContextCompat.getColor(this,
+                    isOggi ? R.color.cal_oggi_bordo : R.color.cal_cella_bordo),
+                dpToPx(8), isOggi ? 2 : 1));
  
             TextView tvEmoji = new TextView(this);
             tvEmoji.setText(getFaseEmoji(info.fase));
@@ -144,21 +152,18 @@ public class CalendarioActivity extends AppCompatActivity {
             tvGiorno.setText(String.valueOf(giorno));
             tvGiorno.setTextSize(11);
             tvGiorno.setGravity(Gravity.CENTER);
-            tvGiorno.setTextColor(isOggi
-                ? ContextCompat.getColor(this, R.color.testo_principale)
-                : ContextCompat.getColor(this, R.color.testo_muto));
+            tvGiorno.setTextColor(ContextCompat.getColor(this,
+                isOggi ? R.color.testo_principale : R.color.testo_muto));
  
             cell.addView(tvEmoji);
             cell.addView(tvGiorno);
  
-            final int giornoFinale = giorno;
-            final int meseFinale = meseCorrente;
-            final int annoFinale = annoCorrente;
+            final int gf = giorno, mf = meseCorrente, af = annoCorrente;
             cell.setOnClickListener(v -> {
                 Intent intent = new Intent(this, DettaglioGiornoActivity.class);
-                intent.putExtra("giorno", giornoFinale);
-                intent.putExtra("mese", meseFinale);
-                intent.putExtra("anno", annoFinale);
+                intent.putExtra("giorno", gf);
+                intent.putExtra("mese", mf);
+                intent.putExtra("anno", af);
                 startActivity(intent);
             });
  
@@ -168,15 +173,15 @@ public class CalendarioActivity extends AppCompatActivity {
  
     private String getFaseEmoji(LunaCalcolo.FaseLunare fase) {
         switch (fase) {
-            case LUNA_NUOVA: return "🌑";
-            case CRESCENTE_FALCE: return "🌒";
-            case PRIMO_QUARTO: return "🌓";
+            case LUNA_NUOVA:        return "🌑";
+            case CRESCENTE_FALCE:   return "🌒";
+            case PRIMO_QUARTO:      return "🌓";
             case CRESCENTE_GIBBOSA: return "🌔";
-            case LUNA_PIENA: return "🌕";
-            case CALANTE_GIBBOSA: return "🌖";
-            case ULTIMO_QUARTO: return "🌗";
-            case CALANTE_FALCE: return "🌘";
-            default: return "🌑";
+            case LUNA_PIENA:        return "🌕";
+            case CALANTE_GIBBOSA:   return "🌖";
+            case ULTIMO_QUARTO:     return "🌗";
+            case CALANTE_FALCE:     return "🌘";
+            default:                return "🌑";
         }
     }
  
