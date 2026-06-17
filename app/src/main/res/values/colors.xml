@@ -73,5 +73,10 @@
     <color name="btn_mese_sfondo">#d4e8d0</color>
     <color name="btn_mese_bordo">#7a9e74</color>
     <color name="btn_mese_testo">#2e5228</color>
+
+    <!-- Pulsante calendario -->
+    <color name="btn_calendario_sfondo">#6a4828</color>
+    <color name="btn_calendario_bordo">#4a3018</color>
+    <color name="btn_calendario_testo">#f0e8d8</color>
  
 </resources>
