@@ -13,7 +13,7 @@ import java.util.Locale;
  
 public class MainActivity extends AppCompatActivity {
  
-    private LunaView lunaView;
+    private TextView tvLunaEmoji;
     private TextView tvFaseNome, tvFaseSottotitolo, tvCicloInfo, tvDataOggi;
     private TextView tvCapelliPillola, tvCapelliTesto;
     private TextView tvLegnaPillola, tvLegnaTesto, tvLegnaProssimo;
@@ -28,8 +28,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
-        ((TextView) findViewById(R.id.btnCalendario)).setTextColor(ContextCompat.getColor(this, R.color.btn_calendario_testo));
         aggiornaConFaseLunare();
+        ((TextView) findViewById(R.id.btnCalendario)).setTextColor(
+            ContextCompat.getColor(this, R.color.btn_calendario_testo));
         findViewById(R.id.btnCalendario).setOnClickListener(v ->
             startActivity(new Intent(this, CalendarioActivity.class)));
         findViewById(R.id.btnAbout).setOnClickListener(v ->
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     }
  
     private void initViews() {
-        lunaView = findViewById(R.id.lunaView);
+        tvLunaEmoji = findViewById(R.id.tvLunaEmoji);
         tvFaseNome = findViewById(R.id.tvFaseNome);
         tvFaseSottotitolo = findViewById(R.id.tvFaseSottotitolo);
         tvCicloInfo = findViewById(R.id.tvCicloInfo);
@@ -62,14 +63,24 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.mc1), findViewById(R.id.mc2),
             findViewById(R.id.mc3), findViewById(R.id.mc4)
         };
-        // Applica sfondo verde salvia alle mini card ortaggi
         for (LinearLayout mc : miniCards) {
             mc.setBackground(creaRoundDrawable(
                 ContextCompat.getColor(this, R.color.mini_card_ortaggi_sfondo),
                 ContextCompat.getColor(this, R.color.mini_card_ortaggi_bordo),
                 dpToPx(8), 1));
         }
-        // Applica sfondo ambra al box legna prossimo
+        // Sfondo icone sezione da colors.xml
+        int[] iconeIds = {R.id.iconaCapelli, R.id.iconaSemina, R.id.iconaLegna};
+        for (int id : iconeIds) {
+            TextView icona = findViewById(id);
+            if (icona != null) {
+                android.graphics.drawable.GradientDrawable bg =
+                    new android.graphics.drawable.GradientDrawable();
+                bg.setColor(ContextCompat.getColor(this, R.color.icona_sezione_sfondo));
+                bg.setCornerRadius(dpToPx(8));
+                icona.setBackground(bg);
+            }
+        }
         layoutLegnaProssimo.setBackground(creaRoundDrawable(
             ContextCompat.getColor(this, R.color.legna_prossimo_sfondo),
             ContextCompat.getColor(this, R.color.legna_prossimo_bordo),
@@ -84,7 +95,10 @@ public class MainActivity extends AppCompatActivity {
         String dataStr = sdf.format(oggi);
         dataStr = dataStr.substring(0, 1).toUpperCase() + dataStr.substring(1);
         tvDataOggi.setText(dataStr);
-        lunaView.setFase(info.fase, info.illuminazione);
+ 
+        // Emoji luna grande
+        tvLunaEmoji.setText(getFaseEmoji(info.fase));
+ 
         tvFaseNome.setText(getNomeFase(info.fase));
         tvFaseSottotitolo.setText(getSottotitoloFase(info.fase));
         tvCicloInfo.setText(getString(R.string.giorno_ciclo,
@@ -124,7 +138,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
  
-    // Helpers localizzazione
+    public static String getFaseEmoji(LunaCalcolo.FaseLunare fase) {
+        switch (fase) {
+            case LUNA_NUOVA:        return "🌑";
+            case CRESCENTE_FALCE:   return "🌒";
+            case PRIMO_QUARTO:      return "🌓";
+            case CRESCENTE_GIBBOSA: return "🌔";
+            case LUNA_PIENA:        return "🌕";
+            case CALANTE_GIBBOSA:   return "🌖";
+            case ULTIMO_QUARTO:     return "🌗";
+            case CALANTE_FALCE:     return "🌘";
+            default:                return "🌑";
+        }
+    }
+ 
     public String getNomeFase(LunaCalcolo.FaseLunare fase) {
         switch (fase) {
             case LUNA_NUOVA: return getString(R.string.fase_luna_nuova);
@@ -223,7 +250,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
  
-    // Metodi statici condivisi con DettaglioGiornoActivity
     public static void applicaStilePillola(TextView tv, ConsiglioData.Valutazione v,
                                            float density, android.content.Context ctx) {
         android.graphics.drawable.GradientDrawable bg =
@@ -268,7 +294,6 @@ public class MainActivity extends AppCompatActivity {
         tv.setTextColor(ContextCompat.getColor(ctx, colorRes));
     }
  
-    // Helper per creare GradientDrawable da colori
     public static android.graphics.drawable.GradientDrawable creaRoundDrawable(
             int coloreSfondo, int coloreBordo, int radius, int strokeWidth) {
         android.graphics.drawable.GradientDrawable d =
