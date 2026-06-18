@@ -1,5 +1,5 @@
 package com.lunanatura.app;
-
+ 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,23 +10,24 @@ import androidx.core.content.ContextCompat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-
+ 
 public class DettaglioGiornoActivity extends AppCompatActivity {
-
-    private LunaView lunaView;
+ 
+    private TextView tvLunaEmoji;
     private TextView tvFaseNome, tvFaseSottotitolo, tvCicloInfo, tvDataOggi;
     private TextView tvCapelliPillola, tvCapelliTesto;
     private TextView tvLegnaPillola, tvLegnaTesto, tvLegnaProssimo;
     private LinearLayout layoutLegnaProssimo;
     private TextView tvSeminaTesto;
     private TextView[] tvMiniCardLabel, tvMiniCardVal;
-
+    private LinearLayout[] miniCards;
+ 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
-
+ 
         // Adatta topBar
         findViewById(R.id.tvAppTitolo).setVisibility(View.GONE);
         LinearLayout topBar = findViewById(R.id.topBar);
@@ -36,21 +37,22 @@ public class DettaglioGiornoActivity extends AppCompatActivity {
         btnBack.setTextSize(13);
         btnBack.setOnClickListener(v -> finish());
         topBar.addView(btnBack, 0);
-
-        // Nasconde dots e pulsante About
+ 
+        // Nasconde dots e About
         View dotContainer = findViewById(R.id.dotContainer);
         if (dotContainer != null) dotContainer.setVisibility(View.GONE);
         findViewById(R.id.btnAbout).setVisibility(View.GONE);
-
+ 
         // Pulsante torna a oggi
         TextView btnAzione = findViewById(R.id.btnCalendario);
         btnAzione.setText(getString(R.string.btn_oggi));
+        btnAzione.setTextColor(ContextCompat.getColor(this, R.color.btn_calendario_testo));
         btnAzione.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         });
-
+ 
         int giorno = getIntent().getIntExtra("giorno", 1);
         int mese   = getIntent().getIntExtra("mese", 0);
         int anno   = getIntent().getIntExtra("anno", Calendar.getInstance().get(Calendar.YEAR));
@@ -58,9 +60,9 @@ public class DettaglioGiornoActivity extends AppCompatActivity {
         cal.set(anno, mese, giorno);
         aggiornaConData(cal);
     }
-
+ 
     private void initViews() {
-        lunaView = findViewById(R.id.lunaView);
+        tvLunaEmoji = findViewById(R.id.tvLunaEmoji);
         tvFaseNome = findViewById(R.id.tvFaseNome);
         tvFaseSottotitolo = findViewById(R.id.tvFaseSottotitolo);
         tvCicloInfo = findViewById(R.id.tvCicloInfo);
@@ -80,41 +82,73 @@ public class DettaglioGiornoActivity extends AppCompatActivity {
             findViewById(R.id.tvMC1Val), findViewById(R.id.tvMC2Val),
             findViewById(R.id.tvMC3Val), findViewById(R.id.tvMC4Val)
         };
+        miniCards = new LinearLayout[]{
+            findViewById(R.id.mc1), findViewById(R.id.mc2),
+            findViewById(R.id.mc3), findViewById(R.id.mc4)
+        };
+        for (LinearLayout mc : miniCards) {
+            mc.setBackground(MainActivity.creaRoundDrawable(
+                ContextCompat.getColor(this, R.color.mini_card_ortaggi_sfondo),
+                ContextCompat.getColor(this, R.color.mini_card_ortaggi_bordo),
+                Math.round(8 * getResources().getDisplayMetrics().density), 1));
+        }
+        // Sfondo icone sezione da colors.xml
+        int[] iconeIds = {R.id.iconaCapelli, R.id.iconaSemina, R.id.iconaLegna};
+        for (int id : iconeIds) {
+            android.widget.TextView icona = findViewById(id);
+            if (icona != null) {
+                android.graphics.drawable.GradientDrawable bg =
+                    new android.graphics.drawable.GradientDrawable();
+                bg.setColor(ContextCompat.getColor(this, R.color.icona_sezione_sfondo));
+                bg.setCornerRadius(Math.round(8 * getResources().getDisplayMetrics().density));
+                icona.setBackground(bg);
+            }
+        }
+        layoutLegnaProssimo.setBackground(MainActivity.creaRoundDrawable(
+            ContextCompat.getColor(this, R.color.legna_prossimo_sfondo),
+            ContextCompat.getColor(this, R.color.legna_prossimo_bordo),
+            Math.round(8 * getResources().getDisplayMetrics().density), 1));
     }
-
+ 
     private void aggiornaConData(Calendar cal) {
         LunaCalcolo.InfoLuna info = LunaCalcolo.calcolaFase(cal.getTime());
-        MainActivity main = new MainActivity();
-
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE d MMMM yyyy", new Locale(getString(R.string.locale_code)));
+ 
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE d MMMM yyyy",
+            new Locale(getString(R.string.locale_code)));
         String dataStr = sdf.format(cal.getTime());
         dataStr = dataStr.substring(0, 1).toUpperCase() + dataStr.substring(1);
         tvDataOggi.setText(dataStr);
         tvDataOggi.setVisibility(View.VISIBLE);
-
-        lunaView.setFase(info.fase, info.illuminazione);
+ 
+        tvLunaEmoji.setText(MainActivity.getFaseEmoji(info.fase));
         tvFaseNome.setText(getNomeFase(info.fase));
         tvFaseSottotitolo.setText(getSottotitoloFase(info.fase));
-        tvCicloInfo.setText(getString(R.string.giorno_ciclo, info.giornoCiclo, Math.round(info.illuminazione * 100)));
-
-        ConsiglioData.ConsiglioSezione capelli = ConsiglioData.getConsiglioCapelli(info.fase, info.etaGiorni);
+        tvCicloInfo.setText(getString(R.string.giorno_ciclo,
+            info.giornoCiclo, Math.round(info.illuminazione * 100)));
+ 
+        ConsiglioData.ConsiglioSezione capelli =
+            ConsiglioData.getConsiglioCapelli(info.fase, info.etaGiorni);
         tvCapelliPillola.setText(getStringCapelliPillola(info.fase));
         tvCapelliTesto.setText(getStringCapelliTesto(info.fase));
         MainActivity.applicaStilePillola(tvCapelliPillola, capelli.valutazionePillola,
             getResources().getDisplayMetrics().density, this);
-
-        ConsiglioData.ConsiglioSezione semina = ConsiglioData.getConsiglioSemina(info.fase, info.etaGiorni);
+ 
+        ConsiglioData.ConsiglioSezione semina =
+            ConsiglioData.getConsiglioSemina(info.fase, info.etaGiorni);
         tvMiniCardLabel[0].setText(getString(R.string.mc_ortaggi_aerei));
         tvMiniCardLabel[1].setText(getString(R.string.mc_ortaggi_sotterranei));
         tvMiniCardLabel[2].setText(getString(R.string.mc_trapianto));
         tvMiniCardLabel[3].setText(getString(R.string.mc_raccolta));
         for (int i = 0; i < 4; i++) {
+            tvMiniCardLabel[i].setTextColor(
+                ContextCompat.getColor(this, R.color.mini_card_ortaggi_label));
             tvMiniCardVal[i].setText(getStringValutazione(semina.miniCardVal[i]));
             MainActivity.applicaColoreValore(tvMiniCardVal[i], semina.miniCardVal[i], this);
         }
         tvSeminaTesto.setText(getStringSeminaTesto(info.fase));
-
-        ConsiglioData.ConsiglioSezione legna = ConsiglioData.getConsiglioLegna(info.fase, info.etaGiorni);
+ 
+        ConsiglioData.ConsiglioSezione legna =
+            ConsiglioData.getConsiglioLegna(info.fase, info.etaGiorni);
         tvLegnaPillola.setText(getStringLegnaPillola(info.fase));
         tvLegnaTesto.setText(getStringLegnaTesto(info.fase));
         MainActivity.applicaStilePillola(tvLegnaPillola, legna.valutazionePillola,
@@ -126,78 +160,81 @@ public class DettaglioGiornoActivity extends AppCompatActivity {
             layoutLegnaProssimo.setVisibility(View.GONE);
         }
     }
-
+ 
     private String getNomeFase(LunaCalcolo.FaseLunare fase) {
         switch (fase) {
             case LUNA_NUOVA: return getString(R.string.fase_luna_nuova);
-            case CRESCENTE_FALCE: case PRIMO_QUARTO: case CRESCENTE_GIBBOSA: return getString(R.string.fase_crescente);
+            case CRESCENTE_FALCE: case PRIMO_QUARTO: case CRESCENTE_GIBBOSA:
+                return getString(R.string.fase_crescente);
             case LUNA_PIENA: return getString(R.string.fase_luna_piena);
             default: return getString(R.string.fase_calante);
         }
     }
-
+ 
     private String getSottotitoloFase(LunaCalcolo.FaseLunare fase) {
         switch (fase) {
-            case LUNA_NUOVA: return getString(R.string.sub_inizio_ciclo);
-            case CRESCENTE_FALCE: return getString(R.string.sub_falce_crescente);
-            case PRIMO_QUARTO: return getString(R.string.fase_crescente);
+            case LUNA_NUOVA:        return getString(R.string.sub_inizio_ciclo);
+            case CRESCENTE_FALCE:   return getString(R.string.sub_falce_crescente);
+            case PRIMO_QUARTO:      return getString(R.string.fase_crescente);
             case CRESCENTE_GIBBOSA: return getString(R.string.sub_gibbosa_crescente);
-            case LUNA_PIENA: return getString(R.string.sub_plenilunio);
-            case CALANTE_GIBBOSA: return getString(R.string.sub_gibbosa_calante);
-            case ULTIMO_QUARTO: return getString(R.string.fase_calante);
-            default: return getString(R.string.sub_falce_calante);
+            case LUNA_PIENA:        return getString(R.string.sub_plenilunio);
+            case CALANTE_GIBBOSA:   return getString(R.string.sub_gibbosa_calante);
+            case ULTIMO_QUARTO:     return getString(R.string.fase_calante);
+            default:                return getString(R.string.sub_falce_calante);
         }
     }
-
+ 
     private String getStringValutazione(ConsiglioData.Valutazione v) {
         switch (v) {
-            case OTTIMO: return getString(R.string.val_ottimo);
-            case FAVOREVOLE: return getString(R.string.val_favorevole);
-            case BUONO: return getString(R.string.val_buono);
-            case NEUTRO: return getString(R.string.val_neutro);
+            case OTTIMO:       return getString(R.string.val_ottimo);
+            case FAVOREVOLE:   return getString(R.string.val_favorevole);
+            case BUONO:        return getString(R.string.val_buono);
+            case NEUTRO:       return getString(R.string.val_neutro);
             case SCONSIGLIATO: return getString(R.string.val_sconsigliato);
-            case EVITA: return getString(R.string.val_evita);
-            default: return "";
+            case EVITA:        return getString(R.string.val_evita);
+            default:           return "";
         }
     }
-
+ 
     private String getStringCapelliPillola(LunaCalcolo.FaseLunare fase) {
-        if (LunaCalcolo.isNuova(fase)) return getString(R.string.capelli_pill_evita);
+        if (LunaCalcolo.isNuova(fase))     return getString(R.string.capelli_pill_evita);
         if (LunaCalcolo.isCrescente(fase)) return getString(R.string.capelli_pill_ottimo);
-        if (LunaCalcolo.isPiena(fase)) return getString(R.string.capelli_pill_buono);
+        if (LunaCalcolo.isPiena(fase))     return getString(R.string.capelli_pill_buono);
         return getString(R.string.capelli_pill_mantieni);
     }
-
+ 
     private String getStringCapelliTesto(LunaCalcolo.FaseLunare fase) {
-        if (LunaCalcolo.isNuova(fase)) return getString(R.string.capelli_testo_nuova);
+        if (LunaCalcolo.isNuova(fase))     return getString(R.string.capelli_testo_nuova);
         if (LunaCalcolo.isCrescente(fase)) return getString(R.string.capelli_testo_crescente);
-        if (LunaCalcolo.isPiena(fase)) return getString(R.string.capelli_testo_piena);
+        if (LunaCalcolo.isPiena(fase))     return getString(R.string.capelli_testo_piena);
         return getString(R.string.capelli_testo_calante);
     }
-
+ 
     private String getStringSeminaTesto(LunaCalcolo.FaseLunare fase) {
-        if (LunaCalcolo.isNuova(fase)) return getString(R.string.semina_testo_nuova);
+        if (LunaCalcolo.isNuova(fase))     return getString(R.string.semina_testo_nuova);
         if (LunaCalcolo.isCrescente(fase)) return getString(R.string.semina_testo_crescente);
-        if (LunaCalcolo.isPiena(fase)) return getString(R.string.semina_testo_piena);
+        if (LunaCalcolo.isPiena(fase))     return getString(R.string.semina_testo_piena);
         return getString(R.string.semina_testo_calante);
     }
-
+ 
     private String getStringLegnaPillola(LunaCalcolo.FaseLunare fase) {
-        if (LunaCalcolo.isNuova(fase) || LunaCalcolo.isCalante(fase)) return getString(R.string.legna_pill_ideale);
+        if (LunaCalcolo.isNuova(fase) || LunaCalcolo.isCalante(fase))
+            return getString(R.string.legna_pill_ideale);
         if (LunaCalcolo.isCrescente(fase)) return getString(R.string.legna_pill_sconsigliato);
         return getString(R.string.legna_pill_evita);
     }
-
+ 
     private String getStringLegnaTesto(LunaCalcolo.FaseLunare fase) {
-        if (LunaCalcolo.isNuova(fase)) return getString(R.string.legna_testo_nuova);
+        if (LunaCalcolo.isNuova(fase))     return getString(R.string.legna_testo_nuova);
         if (LunaCalcolo.isCrescente(fase)) return getString(R.string.legna_testo_crescente);
-        if (LunaCalcolo.isPiena(fase)) return getString(R.string.legna_testo_piena);
+        if (LunaCalcolo.isPiena(fase))     return getString(R.string.legna_testo_piena);
         return getString(R.string.legna_testo_calante);
     }
-
+ 
     private String getStringLegnaProssimo(LunaCalcolo.FaseLunare fase, double etaGiorni) {
         if (LunaCalcolo.isNuova(fase) || LunaCalcolo.isCalante(fase))
             return getString(R.string.legna_prossimo_adesso);
-        return getString(R.string.legna_prossimo_giorni, LunaCalcolo.giorniACalante(etaGiorni));
+        return getString(R.string.legna_prossimo_giorni,
+            LunaCalcolo.giorniACalante(etaGiorni));
     }
 }
