@@ -52,7 +52,7 @@
                 android:gravity="center"/>
         </LinearLayout>
  
-        <!-- Luna grafica -->
+        <!-- Luna emoji grande -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,16 +61,19 @@
             android:paddingTop="20dp"
             android:paddingBottom="12dp">
  
-            <com.lunanatura.app.LunaView
-                android:id="@+id/lunaView"
-                android:layout_width="150dp"
-                android:layout_height="150dp"/>
+            <TextView
+                android:id="@+id/tvLunaEmoji"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🌕"
+                android:textSize="80sp"
+                android:gravity="center"/>
  
             <TextView
                 android:id="@+id/tvFaseNome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 android:textColor="@color/testo_principale"
                 android:textSize="22sp"
                 android:fontFamily="serif"/>
@@ -146,9 +149,9 @@
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:orientation="horizontal" android:gravity="center_vertical"
                 android:layout_marginBottom="10dp">
-                <TextView android:layout_width="32dp" android:layout_height="32dp"
-                    android:text="✂" android:textSize="16sp" android:gravity="center"
-                    android:background="@drawable/icona_bg_verde"/>
+                <TextView android:layout_width="42dp" android:layout_height="42dp"
+                    android:text="✂" android:textSize="24sp" android:gravity="center"
+                    android:id="@+id/iconaCapelli"/>
                 <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                     android:layout_weight="1" android:layout_marginStart="10dp"
                     android:text="@string/sezione_capelli"
@@ -166,15 +169,15 @@
         <View android:layout_width="match_parent" android:layout_height="0.5dp"
             android:background="@color/bordo"/>
  
-        <!-- Sezione Semina — le mini card hanno sfondo/bordo impostati via Java da colors.xml -->
+        <!-- Sezione Semina -->
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
             android:orientation="vertical" android:padding="20dp">
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:orientation="horizontal" android:gravity="center_vertical"
                 android:layout_marginBottom="12dp">
-                <TextView android:layout_width="32dp" android:layout_height="32dp"
-                    android:text="🌱" android:textSize="16sp" android:gravity="center"
-                    android:background="@drawable/icona_bg_teal"/>
+                <TextView android:layout_width="42dp" android:layout_height="42dp"
+                    android:text="🌱" android:textSize="24sp" android:gravity="center"
+                    android:id="@+id/iconaSemina"/>
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:layout_marginStart="10dp" android:text="@string/sezione_semina"
                     android:textColor="@color/testo_principale" android:textSize="15sp" android:fontFamily="serif"/>
@@ -227,15 +230,15 @@
         <View android:layout_width="match_parent" android:layout_height="0.5dp"
             android:background="@color/bordo"/>
  
-        <!-- Sezione Legna — box prossimo momento ha sfondo/bordo impostati via Java da colors.xml -->
+        <!-- Sezione Legna -->
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
             android:orientation="vertical" android:padding="20dp">
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:orientation="horizontal" android:gravity="center_vertical"
                 android:layout_marginBottom="10dp">
-                <TextView android:layout_width="32dp" android:layout_height="32dp"
-                    android:text="🪓" android:textSize="16sp" android:gravity="center"
-                    android:background="@drawable/icona_bg_terra"/>
+                <TextView android:layout_width="42dp" android:layout_height="42dp"
+                    android:text="🪓" android:textSize="24sp" android:gravity="center"
+                    android:id="@+id/iconaLegna"/>
                 <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                     android:layout_weight="1" android:layout_marginStart="10dp"
                     android:text="@string/sezione_legna"
@@ -271,7 +274,7 @@
             <TextView android:id="@+id/btnCalendario"
                 android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:text="@string/btn_calendario"
-                android:textColor="@color/testo_principale" android:textSize="13sp"
+                android:textSize="13sp"
                 android:paddingStart="20dp" android:paddingEnd="20dp"
                 android:paddingTop="10dp" android:paddingBottom="10dp"
                 android:background="@drawable/btn_calendario_bg"/>
