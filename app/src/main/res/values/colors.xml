@@ -69,14 +69,17 @@
     <color name="cal_oggi_sfondo">#e0d0b0</color>
     <color name="cal_oggi_bordo">#7a5838</color>
  
-    <!-- Pulsanti cambio mese -->
+    <!-- Pulsanti cambio mese calendario -->
     <color name="btn_mese_sfondo">#d4e8d0</color>
     <color name="btn_mese_bordo">#7a9e74</color>
     <color name="btn_mese_testo">#2e5228</color>
-
+ 
     <!-- Pulsante calendario -->
     <color name="btn_calendario_sfondo">#6a4828</color>
     <color name="btn_calendario_bordo">#4a3018</color>
     <color name="btn_calendario_testo">#f0e8d8</color>
+ 
+    <!-- Icone sezioni (sfondo verde scuro, emoji chiare) -->
+    <color name="icona_sezione_sfondo">#3a6835</color>
  
 </resources>
